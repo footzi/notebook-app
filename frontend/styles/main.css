@@ -1,0 +1,11 @@
+.b-form {
+    display: flex;
+    flex-direction: column;
+    width: 40%;
+}
+
+.b-form__input, 
+.b-form__textarea {
+    margin-bottom: 20px;
+}
+

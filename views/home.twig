@@ -1,0 +1,28 @@
+{% extends "./layout.twig" %}
+
+{% block title %}
+    Главная страница
+{% endblock %}
+{% block content %}
+    <h2>Домашняя страница</h2>
+    <h3>Все записи</h3>
+
+    <ul class="b-notes">
+        {% for note in notes %}
+            {# <li> {{note}} </li> #}
+            {% include "./templates/note.twig" with {title: note.title, body: note.body}%}
+        {% endfor %}
+    </ul>
+    <h3>Создать запись</h3>
+
+    <form method="post" class="b-form">
+        <label for="title">Заголовок</label>
+        <input id="title" type="text" name="title" class="b-form__input">
+        <label for="body">Заголовок</label>
+        <textarea id="body" cols="30", rows="10" name="body" class="b-form__textarea"></textarea>
+        <button class="b-form__button" type="submit">Отправить</button>
+        <button type="reset">Очистить</button>
+    </form>
+{% endblock %}
+
+
