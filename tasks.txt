@@ -1,0 +1,25 @@
+database()
+    .then((info) => {
+        console.log(`connected to database' ${info.host}:${info.port}/${info.name}`)
+        //запуск сервера
+        app.listen(config.PORT, () => {
+            console.log(`Example app listening on port ${config.PORT}!`);
+        });
+    })
+    .catch(() => {
+        console.error('error connected');
+    })
+
+
+Создание инфы (присвоение значений)
+INSERT INTO `notes`.`new_table` (`id`, `name`) VALUES ('2', 'anton');
+
+Cоздание нового столбца
+ALTER TABLE `notes`.`new_table` 
+ADD COLUMN `female` VARCHAR(45) NULL AFTER `name`;
+
+Вернет все записи из таблицы
+SELECT * FROM new_table -- js
+SELECT * FROM `notes`.`new_table` - sql
+
+

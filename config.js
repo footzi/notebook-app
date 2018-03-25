@@ -1,6 +1,9 @@
 const config  = {
-    PORT: process.env.PORT || 8080,
-    MONGO_URL: 'mongodb://footzi:Lipton321@ds119685.mlab.com:19685/note'
+    PORT     : process.env.PORT || 8080,
+    host     : 'localhost',
+    user     : 'footzi',
+    password : 'Lipton321',
+    database : 'notes'
 };
 
 export default config;

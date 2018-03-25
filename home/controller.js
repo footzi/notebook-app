@@ -1,18 +1,14 @@
 import Note from '../models/note';
 import bodyParser from 'body-parser';
+import connectionDB from '../database';
 
 const homeController = {
 
     //выводит все записи
     getAllNotes(req, res) {
-        Note
-            .find()
-            .exec((err, notes) => {
-                if (err) throw err;
-                res.render('home', {
-                    notes
-                });
-            })
+        Note.findAll{
+            attributes: ['foo', 'bar']
+        })
     },
 
     //сохраняет запись

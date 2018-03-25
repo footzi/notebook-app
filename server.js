@@ -3,7 +3,8 @@ import twig from 'twig';
 import path from 'path';
 import bodyParser from 'body-parser';
 import config from './config';
-import database from './database';
+import Sequelize from 'sequelize';
+import connectionDB from './database';
 
 import Note from './models/note';
 
@@ -28,17 +29,39 @@ app.set('twig options', {
 
 app.route('/')
     .get(homeController.getAllNotes)
-    .post(homeController.addNote)
+    //.post(homeController.addNote)
+
+
+
 
 //подключение к БД
-database()
-    .then((info) => {
-        console.log(`connected to database' ${info.host}:${info.port}/${info.name}`)
-        //запуск сервера
-        app.listen(config.PORT, () => {
-            console.log(`Example app listening on port ${config.PORT}!`);
-        });
-    })
-    .catch(() => {
-        console.error('error connected');
-    })
+
+
+
+
+// Note.create({
+//     title: 'test title',
+//     content: 'test body'
+// })
+
+// Article.findById(2).then((article => {
+//     console.log(article.dataValues);
+// }))
+
+connectionDB
+  .authenticate()
+  .then(() => {
+    console.log('Connection has been established successfully.');
+  })
+  .catch(err => {
+    console.error('Unable to connect to the database:', err);
+  });
+
+// connectionDB.sync({
+//     //logging: console.log
+// })
+
+
+app.listen(config.PORT, () => {
+    console.log(`Example app listening on port ${config.PORT}!`);
+});

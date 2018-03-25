@@ -1,23 +1,9 @@
-import mongoose from 'mongoose';
-const Schema = mongoose.Schema;
+import Sequelize from 'sequelize';
+import connectionDB from '../database';
 
-const schema = new Schema({
-    title: {
-        type: String,
-        required: true
-    },
-    body: {
-        type: String,
-        required: true
-    }   
-}, {
-    timestamps: true
-});
-
-schema.set('toJSON', {
-    virtuals: true
+const Note = connectionDB.define('notes', {
+    title: Sequelize.STRING,
+    content: Sequelize.TEXT
 })
-
-const Note = mongoose.model('Note', schema);
 
 export default Note;
