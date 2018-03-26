@@ -2,7 +2,8 @@ const config  = {
     PORT     : process.env.PORT || 8080,
     host     : 'eu-cdbr-west-02.cleardb.net',
     user     : 'b12b8db6248fd3',
-    password : '424675ee'
+    password : '424675ee',
+    database : 'heroku_097585ac11dbd0f'
 };
 
 export default config;

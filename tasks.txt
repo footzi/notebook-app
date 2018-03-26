@@ -13,6 +13,7 @@ database()
 
 Создание инфы (присвоение значений)
 INSERT INTO `notes`.`new_table` (`id`, `name`) VALUES ('2', 'anton');
+Не создатся если не заполнить все поля
 
 Cоздание нового столбца
 ALTER TABLE `notes`.`new_table` 

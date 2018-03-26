@@ -6,7 +6,7 @@ import config from './config';
 import Sequelize from 'sequelize';
 import connectionDB from './database';
 
-import Note from './models/note';
+//import Note from './models/note';
 
 import homeController from './home/controller';
 
@@ -36,17 +36,14 @@ app.route('/')
 
 //подключение к БД
 
-
-
-
-// Note.create({
-//     title: 'test title',
-//     content: 'test body'
-// })
-
 // Article.findById(2).then((article => {
 //     console.log(article.dataValues);
 // }))
+
+// connectionDB.sync({
+//     force: true,
+//     logging: console.log
+// });
 
 connectionDB
     .authenticate()
@@ -56,8 +53,6 @@ connectionDB
     .catch(err => {
     console.error('Unable to connect to the database:', err);
     });
-
-//connectionDB.sync();
 
 app.listen(config.PORT, () => {
     console.log(`Example app listening on port ${config.PORT}!`);
