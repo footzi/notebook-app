@@ -16,7 +16,7 @@ const app = express();
 app.use(express.static(path.join(__dirname, '/')));
 
 //настройка бодипарсера
-app.use(bodyParser.urlencoded({ extended: true }))
+app.use(bodyParser.urlencoded({ extended: true }));
 
 //подключаем шаблонизатор, и нацелеваем на views
 app.set('views', __dirname + '/views');
@@ -49,18 +49,15 @@ app.route('/')
 // }))
 
 connectionDB
-  .authenticate()
-  .then(() => {
+    .authenticate()
+    .then(() => {
     console.log('Connection has been established successfully.');
-  })
-  .catch(err => {
+    })
+    .catch(err => {
     console.error('Unable to connect to the database:', err);
-  });
+    });
 
-// connectionDB.sync({
-//     //logging: console.log
-// })
-
+//connectionDB.sync();
 
 app.listen(config.PORT, () => {
     console.log(`Example app listening on port ${config.PORT}!`);
