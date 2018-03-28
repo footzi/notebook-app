@@ -28,8 +28,8 @@ app.set('twig options', {
 //обрабатываем корневые маршруты
 
 app.route('/')
-    .get(homeController.getAllNotes)
-    //.post(homeController.addNote)
+    .get(homeController.renderAllNotes)
+    .post(homeController.addNote)
 
 
 
