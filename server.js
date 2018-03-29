@@ -27,11 +27,8 @@ app.set('twig options', {
 
 //обрабатываем корневые маршруты
 
-app.route('/')
-    .get(homeController.renderAllNotes)
-    .post(homeController.addNote)
-
-
+app.get('/', homeController.renderAllNotes);
+app.post('/create-note', homeController.createNote)
 
 
 //подключение к БД
@@ -40,10 +37,10 @@ app.route('/')
 //     console.log(article.dataValues);
 // }))
 
-// connectionDB.sync({
-//     force: true,
-//     logging: console.log
-// });
+connectionDB.sync({
+    force: true,
+    logging: console.log
+});
 
 connectionDB
     .authenticate()

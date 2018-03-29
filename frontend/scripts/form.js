@@ -1,4 +1,5 @@
 import template from '../../views/templates/note.twig';
+import fetch from 'node-fetch';
 
 class Form {
     constructor(options) {
@@ -12,17 +13,27 @@ class Form {
     }
 
     bindEvents() {
-        this.button.addEventListener('click', this.getData.bind(this));
+        this.button.addEventListener('click', element => {
+            element.preventDefault();
+            this.getData();
+            this.sendData();
+            console.log('просто клик');
+        });
     }
 
     getData() {
         this.note = {
             title: this.input.value,
-            body : this.textarea.value
+            content : this.textarea.value
         }
-        console.log(this.note);
-
         this.insertTemplate();
+    }
+
+    //очистить форму
+
+    sendData() {
+        console.log(this.note);
+        fetch('/create-note', { method: 'POST', body: this.note })
     }
 
     insertTemplate() {

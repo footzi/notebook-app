@@ -6,22 +6,21 @@ import Note from '../models/Schemes/note';
 const homeController = {
 
     //выводит все записи
-    renderAllNotes(req, res) {
-        notes.getAllNotes().then(function(notes) {
+    async renderAllNotes(req, res) {
+        try {
             res.render('home', {
-                notes: notes
+                notes: await notes.getAllNotes()
             })
-        })
+        } catch(error) {
+            throw new Error('не удалось отобразить шаблон')
+        }
     },
 
     //сохраняет запись
-    addNote(req, res) {
-        const {title, body} = req.body;
-        Note
-            .create({title, body}, function(err, note) {
-                if (err) throw err;
-                res.redirect('/');        
-            })
+    createNote(req, res) {
+        res.status(200);
+        res.end();
+        notes.setNote(req.body);
     }
 };
 
