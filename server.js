@@ -1,10 +1,10 @@
 import express from 'express';
 import twig from 'twig';
 import path from 'path';
-import bodyParser from 'body-parser';
 import config from './config';
 import Sequelize from 'sequelize';
 import connectionDB from './database';
+import bodyParser from 'body-parser';
 
 //import Note from './models/note';
 
@@ -16,7 +16,8 @@ const app = express();
 app.use(express.static(path.join(__dirname, '/')));
 
 //настройка бодипарсера
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json()); // for parsing application/json
+app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
 
 //подключаем шаблонизатор, и нацелеваем на views
 app.set('views', __dirname + '/views');
@@ -28,8 +29,7 @@ app.set('twig options', {
 //обрабатываем корневые маршруты
 
 app.get('/', homeController.renderAllNotes);
-app.post('/create-note', homeController.createNote)
-
+app.post('/create-note', homeController.createNote);
 
 //подключение к БД
 
@@ -37,10 +37,10 @@ app.post('/create-note', homeController.createNote)
 //     console.log(article.dataValues);
 // }))
 
-connectionDB.sync({
-    force: true,
-    logging: console.log
-});
+// connectionDB.sync({
+//     force: true,
+//     logging: console.log
+// });
 
 connectionDB
     .authenticate()

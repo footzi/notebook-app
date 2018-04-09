@@ -17,7 +17,7 @@ class Form {
             element.preventDefault();
             this.getData();
             this.sendData();
-            console.log('просто клик');
+            this.clear();
         });
     }
 
@@ -29,11 +29,17 @@ class Form {
         this.insertTemplate();
     }
 
-    //очистить форму
+    clear() {
+        this.input.value    = '';
+        this.textarea.value = ''
+    }
 
     sendData() {
-        console.log(this.note);
-        fetch('/create-note', { method: 'POST', body: this.note })
+        fetch('/create-note', { 
+            method : 'POST',
+            body   :    JSON.stringify(this.note),
+            headers: { 'Content-Type': 'application/json' },
+        })
     }
 
     insertTemplate() {

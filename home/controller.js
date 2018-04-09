@@ -2,6 +2,9 @@ import bodyParser from 'body-parser';
 import connectionDB from '../database';
 import notes from '../models/notes';
 import Note from '../models/Schemes/note';
+// import bodyParser from 'body-parser';
+
+// app.use(bodyParser.urlencoded({ extended: true }));
 
 const homeController = {
 
@@ -12,7 +15,7 @@ const homeController = {
                 notes: await notes.getAllNotes()
             })
         } catch(error) {
-            throw new Error('не удалось отобразить шаблон')
+            throw new Error('не удалось показать шаблон')
         }
     },
 
