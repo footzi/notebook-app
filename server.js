@@ -1,11 +1,12 @@
 import express from 'express';
 import twig from 'twig';
 import path from 'path';
-import bodyParser from 'body-parser';
 import config from './config';
-import database from './database';
+import Sequelize from 'sequelize';
+import connectionDB from './database';
+import bodyParser from 'body-parser';
 
-import Note from './models/note';
+//import Note from './models/note';
 
 import homeController from './home/controller';
 
@@ -15,7 +16,8 @@ const app = express();
 app.use(express.static(path.join(__dirname, '/')));
 
 //настройка бодипарсера
-app.use(bodyParser.urlencoded({ extended: true }))
+app.use(bodyParser.json()); // for parsing application/json
+app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
 
 //подключаем шаблонизатор, и нацелеваем на views
 app.set('views', __dirname + '/views');
@@ -26,19 +28,29 @@ app.set('twig options', {
 
 //обрабатываем корневые маршруты
 
-app.route('/')
-    .get(homeController.getAllNotes)
-    .post(homeController.addNote)
+app.get('/', homeController.renderAllNotes);
+app.post('/create-note', homeController.createNote);
 
 //подключение к БД
-database()
-    .then((info) => {
-        console.log(`connected to database' ${info.host}:${info.port}/${info.name}`)
-        //запуск сервера
-        app.listen(config.PORT, () => {
-            console.log(`Example app listening on port ${config.PORT}!`);
-        });
+
+// Article.findById(2).then((article => {
+//     console.log(article.dataValues);
+// }))
+
+// connectionDB.sync({
+//     force: true,
+//     logging: console.log
+// });
+
+connectionDB
+    .authenticate()
+    .then(() => {
+    console.log('Connection has been established successfully.');
     })
-    .catch(() => {
-        console.error('error connected');
-    })
+    .catch(err => {
+    console.error('Unable to connect to the database:', err);
+    });
+
+app.listen(config.PORT, () => {
+    console.log(`Example app listening on port ${config.PORT}!`);
+});

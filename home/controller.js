@@ -1,28 +1,29 @@
-import Note from '../models/note';
 import bodyParser from 'body-parser';
+import connectionDB from '../database';
+import notes from '../models/notes';
+import Note from '../models/Schemes/note';
+// import bodyParser from 'body-parser';
+
+// app.use(bodyParser.urlencoded({ extended: true }));
 
 const homeController = {
 
     //выводит все записи
-    getAllNotes(req, res) {
-        Note
-            .find()
-            .exec((err, notes) => {
-                if (err) throw err;
-                res.render('home', {
-                    notes
-                });
+    async renderAllNotes(req, res) {
+        try {
+            res.render('home', {
+                notes: await notes.getAllNotes()
             })
+        } catch(error) {
+            throw new Error('не удалось показать шаблон')
+        }
     },
 
     //сохраняет запись
-    addNote(req, res) {
-        const {title, body} = req.body
-        Note
-            .create({title, body}, function(err, note) {
-                if (err) throw err;
-                res.redirect('/');        
-            })
+    createNote(req, res) {
+        res.status(200);
+        res.end();
+        notes.setNote(req.body);
     }
 };
 

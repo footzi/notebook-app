@@ -1,17 +1,17 @@
-import mongoose from 'mongoose';
+import Sequelize from 'sequelize';
 import config from './config';
-const connectDB = () => {
-    return new Promise((resolve, reject) => {
-        mongoose.Promise = global.Promise;
-        mongoose.set('debug', true);
 
-        mongoose.connection
-            .on('error', error => reject(error))
-            .on('close', () =>console.log('DB connection closed'))
-            .once('open', () => resolve(mongoose.connections[0]));
-        
-        mongoose.connect(config.MONGO_URL);
-    });
-};
+const connectionDB = new Sequelize(config.database, config.user, config.password, {
+    host: config.host,
+    dialect: 'mysql',
+    operatorsAliases: false,
+  
+    pool: {
+      max: 5,
+      min: 0,
+      acquire: 30000,
+      idle: 10000
+    },
+});
 
-export default connectDB;
+export default connectionDB;
