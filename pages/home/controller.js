@@ -1,14 +1,10 @@
-import bodyParser from 'body-parser';
-import connectionDB from '../../database';
 import notes from '../../models/notes'
-import Note from '../../models/Schemes/note';
 
 const homeController = {
     //выводит все записи
     renderAllNotes(req, res) {
         notes.getAllNotes()
             .then((resolve)=> {
-                //console.log(resolve);
                 res.render('home', {
                     notes: resolve
                 })

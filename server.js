@@ -27,19 +27,15 @@ app.set('twig options', {
 //обрабатываем маршруты
 app.get('/', homeController.renderAllNotes);
 app.post('/create-note', homeController.createNote);
-app.get('/notes/:notesId', noteController.renderNote);
+app.get('/notes/:noteId', noteController.renderNote);
 
-//подключение к БД
-
-// Article.findById(2).then((article => {
-//     console.log(article.dataValues);
-// }))
-
+//Синхронизаниця с БД
 // connectionDB.sync({
 //     force: true,
 //     logging: console.log
 // });
 
+//подключение к БД
 connectionDB
     .authenticate()
     .then(() => {

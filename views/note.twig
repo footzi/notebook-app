@@ -1,0 +1,13 @@
+{% extends "./layout.twig" %}
+
+{% block title %}
+    Cтраница записи
+{% endblock %}
+{% block content %}
+    <h2>Cтраница записи:</h2>
+    <h3>{{note.title}}</h3>
+    <time>{{note.timeCreate}}</time>
+    <p>{{note.content}}</p>
+{% endblock %}
+
+

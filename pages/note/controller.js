@@ -1,11 +1,18 @@
-import bodyParser from 'body-parser';
-import connectionDB from '../../database';
 import notes from '../../models/notes';
-import Note from '../../models/Schemes/note';
 
 const noteController = {
     renderNote(req, res) {
-        res.send(req.params)
+        notes.getNote(req.params.noteId)
+            .then(resolve => {
+                res.render('note', {
+                    note: resolve
+                })
+            })
+            .catch(reject =>  {
+                console.log('ошибка при получение записи');
+                res.status(500);
+                res.end();
+            })
     }
 }
 

@@ -6,7 +6,7 @@ const notes = {
             return await Note.findAll({raw: true}).then(notes => notes); 
         }
         catch(error) {
-            console.error(`ВЫПАЛА ОШИБКА= ${error}`);
+            console.error(`При поиске всех элементов возникла= ${error}`);
             throw new Error();
         }
     },
@@ -15,7 +15,16 @@ const notes = {
             return await Note.create(data);
         }
         catch(error) {
-            console.error(`ВЫПАЛА ОШИБКА= ${error}`);
+            console.error(`При сохранении элемента возникла ошибка= ${error}`);
+            throw new Error();
+        }
+    },
+    async getNote(id) {
+        try {
+            return await Note.findById(id, {raw: true}).then(note => note);
+        }
+        catch(error) {
+            console.error(`При поиске элемента возникла ошибка= ${error}`);
             throw new Error();
         }
     }
