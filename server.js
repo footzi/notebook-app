@@ -5,10 +5,8 @@ import config from './config';
 import Sequelize from 'sequelize';
 import connectionDB from './database';
 import bodyParser from 'body-parser';
-
-//import Note from './models/note';
-
-import homeController from './home/controller';
+import homeController from './pages/home/controller';
+import noteController from './pages/note/controller';
 
 const app = express();
 
@@ -26,22 +24,18 @@ app.set('twig options', {
     strict_variables: false
 });
 
-//обрабатываем корневые маршруты
-
+//обрабатываем маршруты
 app.get('/', homeController.renderAllNotes);
 app.post('/create-note', homeController.createNote);
+app.get('/notes/:noteId', noteController.renderNote);
 
-//подключение к БД
-
-// Article.findById(2).then((article => {
-//     console.log(article.dataValues);
-// }))
-
+//Синхронизаниця с БД
 // connectionDB.sync({
 //     force: true,
 //     logging: console.log
 // });
 
+//подключение к БД
 connectionDB
     .authenticate()
     .then(() => {

@@ -9,8 +9,7 @@
 
     <ul class="b-notes">
         {% for note in notes %}
-            {# <li> {{note}} </li> #}
-            {% include "./templates/note.twig" with {title: note.title, content: note.content}%}
+            {% include "./templates/note.twig" with {id: note.id, title: note.title, content: note.content, timeCreate: note.timeCreate}%}
         {% endfor %}
     </ul>
     <h3>Создать запись</h3>

@@ -1,5 +1,8 @@
 import template from '../../views/templates/note.twig';
+import moment from 'moment';
 import fetch from 'node-fetch';
+
+moment.locale('ru');
 
 class Form {
     constructor(options) {
@@ -24,9 +27,9 @@ class Form {
     getData() {
         this.note = {
             title: this.input.value,
-            content : this.textarea.value
+            content: this.textarea.value,
+            timeCreate: moment().format('h:mm, Do MMMM YYYY')
         }
-        this.insertTemplate();
     }
 
     clear() {
@@ -37,13 +40,15 @@ class Form {
     sendData() {
         fetch('/create-note', { 
             method : 'POST',
-            body   :    JSON.stringify(this.note),
+            body   : JSON.stringify(this.note),
             headers: { 'Content-Type': 'application/json' },
         })
+        .then(res => res.json())
+        .then(json => this.insertTemplate(json));
     }
 
-    insertTemplate() {
-        this.notes.insertAdjacentHTML('beforeEnd', template(this.note));
+    insertTemplate(data) {
+        this.notes.insertAdjacentHTML('beforeEnd', template(data));
     }
 }
 
