@@ -13,10 +13,8 @@ const Utils = {
         })
     },
 
-    generateFileName(catalog, file) {
-        const filePath = `uploads/${catalog}/`;
-        const fileName =  randomstring.generate(10) + path.extname(files.name);
-        return fileName;
+    generateFileName(file) {
+        return randomstring.generate(10) + path.extname(file.name);
     }
 }
 

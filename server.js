@@ -52,11 +52,12 @@ app.post('/create-note', (req, res) => {
     //     return false;
     // }
     const files = req.files.avatar
-    Utils.writeFile('avatars', files, function(fileName) {
-      return fileName;
-    });
+    console.log(Utils.generateFileName(req.files.avatar.name));
+    // Utils.writeFile('avatars', files, function(fileName) {
+    //   return fileName;
+    // });
     
-    console.log(fileName);
+    // console.log(fileName);
 });
 
 app.get('/notes/:noteId', noteController.renderNote);
