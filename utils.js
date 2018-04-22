@@ -11,6 +11,12 @@ const Utils = {
         fs.writeFile(filePath + fileName, files.data, (err)=> {
             console.log(err);
         })
+    },
+
+    generateFileName(catalog, file) {
+        const filePath = `uploads/${catalog}/`;
+        const fileName =  randomstring.generate(10) + path.extname(files.name);
+        return fileName;
     }
 }
 
