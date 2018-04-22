@@ -1,5 +1,6 @@
 import notes from '../../models/notes'
 
+
 const homeController = {
     //выводит все записи
     renderAllNotes(req, res) {
@@ -18,17 +19,18 @@ const homeController = {
 
     //сохраняет запись
     createNote(req, res) {
-        notes.setNote(req.body)
-            .then((resolve) => {
-                res.json(resolve);
-                res.status(200);
-                res.end();
-            })
-            .catch((reject) => {
-                console.log('ошибка при сохранении данных');
-                res.status(500);
-                res.end();
-            })
+        console.log(req.body);
+        // notes.setNote(req.body)
+        //     .then((resolve) => {
+        //         res.json(resolve);
+        //         res.status(200);
+        //         res.end();
+        //     })
+        //     .catch((reject) => {
+        //         console.log('ошибка при сохранении данных');
+        //         res.status(500);
+        //         res.end();
+        //     })
     }
 };
 
