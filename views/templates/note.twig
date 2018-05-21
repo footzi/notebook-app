@@ -1,4 +1,17 @@
 <li class="b-notes__item">
-    <a href="notes/{{id}}">{{title}}</a>
-    Дата создания: <time>{{timeCreate}}</time>
+    <div class="card-panel grey lighten-5 z-depth-1 row">
+        {% if avatar %}
+            <div class="col s4 m2">
+                <img class="b-notes__image  circle responsive-img valign" src={{avatar}} alt={{title}} >
+            </div>            
+        {% endif %}
+        <div class="col s8 m10">
+            <div class="b-notes__time">
+                <time>{{timeCreate}}</time>
+            </div>
+            <div class="b-notes__link">
+                 <a href="notes/{{id}}">{{title}}</a>
+            </div>
+        </div>
+    </div>
 </li>

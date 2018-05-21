@@ -1,5 +1,5 @@
 import notes from '../../models/notes'
-
+import Utils from '../../utils'
 
 const homeController = {
     //выводит все записи
@@ -18,19 +18,41 @@ const homeController = {
     },
 
     //сохраняет запись
-    createNote(req, res) {
-        console.log(req.body);
-        // notes.setNote(req.body)
-        //     .then((resolve) => {
-        //         res.json(resolve);
-        //         res.status(200);
-        //         res.end();
-        //     })
-        //     .catch((reject) => {
-        //         console.log('ошибка при сохранении данных');
-        //         res.status(500);
-        //         res.end();
-        //     })
+    createNote(req, res) {        
+        let image = {};
+        let file = '';
+        let fileName = '';
+        const catalog = 'uploads/avatars/';
+
+        if (req.files === null) {
+            image.avatar = '';
+
+        } else {
+            file = req.files.avatar;
+            fileName = Utils.generateFileName(req.files.avatar.name);
+            image.avatar = catalog + fileName;
+        }
+        const data = Object.assign(req.body, image);
+
+        Utils.writeFile(catalog, file, fileName)
+            .catch(err => {
+                console.log('Ошибка при сохранении данных ' + err);
+                const error = {
+                    type: 'Ошибка при записи файла',
+                    text: err
+                }
+                res.status(500).send(error);
+            })
+        
+        notes.setNote(data)
+            .then((json) => {
+                res.json(json);
+                res.status(200).end();
+            })
+            .catch((err) => {
+                console.log('Ошибка при сохранении данных ' + err);// Не знаю как имитировать
+                res.status(500).send(err);
+            })
     }
 };
 

@@ -1,4 +1,5 @@
 const path = require('path');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
     entry: './frontend/scripts/app.js',
@@ -7,8 +8,29 @@ module.exports = {
         filename: 'bundle.js'
       },
     module: {
-        rules: [
-          {
+        rules: [{
+          test: /\.css/,
+            use : [
+                MiniCssExtractPlugin.loader,
+                "css-loader"
+            ]
+          }, {
+            test   : /\.scss$/,
+            use    : [
+                MiniCssExtractPlugin.loader,
+                {
+                    loader: 'css-loader',
+                    options: {
+                        sourceMap: true
+                    }
+                }, {
+                    loader: 'sass-loader',
+                    options: {
+                        sourceMap: true
+                    }
+                }
+            ]
+        }, {
             test: /\.js$/,
             exclude: /(node_modules)/,
             use: {
@@ -17,8 +39,7 @@ module.exports = {
                 presets: ['es2015']
               }
             }
-          }, 
-          {
+          }, {
             test   : /\.twig$/,
             exclude: /(node_modules|bower_components)/,
             use    : {
@@ -27,5 +48,10 @@ module.exports = {
           }
         ]
     },
+    plugins: [
+      new MiniCssExtractPlugin({
+        filename: 'app.css'
+      }),
+    ],
     devtool: 'inline-cheap-module-source-map'
 };

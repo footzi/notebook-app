@@ -4,25 +4,51 @@
     Главная страница
 {% endblock %}
 {% block content %}
-    <h2>Домашняя страница</h2>
-    <h3>Все записи</h3>
+    {# <h2>Домашняя страница</h2>
+    <h3>Все записи</h3> #}
+    <h2 class="b-title">Home page</h2>
+    <h5 class="b-subtitle">(render, create, routing)</h5>
 
-    <ul class="b-notes">
+    <ul class="b-notes row">
         {% for note in notes %}
-            {% include "./templates/note.twig" with {id: note.id, title: note.title, content: note.content, timeCreate: note.timeCreate}%}
+            {% include "./templates/note.twig" with {
+                id: note.id,
+                title: note.title,
+                content: note.content,
+                avatar: note.avatar, 
+                timeCreate: note.timeCreate
+                }
+            %}
         {% endfor %}
     </ul>
-    <h3>Создать запись</h3>
+    <div class="b-create">
+        <h3 сlass="b-create__title">Создай запись</h3>
+        <form method="post" action="/create-note" class="b-form">
+            <div class="input-field">
+                <input id="title" type="text" name="title" class="b-form__input" class="validate">
+                <label for="title">Напиши заголовок:</label>
+            </div>
+            <div class="input-field">
+                <label for="content">Придумай контент:</label>
+                <textarea id="content" cols="30", rows="10" name="content" class="b-form__textarea materialize-textarea"></textarea>
+            </div>
+            <div class="file-field input-field">
+                <div class="btn b-btn">
+                    <span>Загрузи аватарку:</span>
+                    <input type="file" accept=".jpg, .jpeg, .png" class="b-form__file" name="avatar">
+                </div>
+                <div class="file-path-wrapper">
+                    <input class="file-path validate" type="text">
+                </div>
+            </div>
+            {# <input type="file" accept=".jpg, .jpeg, .png" class="b-form__file" name="avatar"> #}
+            <button class="b-form__button btn b-btn b-btn_state_send" type="submit">Отправить</button>
+            <button class="btn b-btn b-btn_state_clear" type="reset">Очистить</button>
+        </form>
+    </div>
+   
 
-    <form method="post" action="/create-note" class="b-form">
-        <label for="title">Заголовок</label>
-        <input id="title" type="text" name="title" class="b-form__input">
-        <label for="content">Заголовок</label>
-        <textarea id="content" cols="30", rows="10" name="content" class="b-form__textarea"></textarea>
-        <input type="file" accept=".jpg, .jpeg, .png" class="b-form__file" name="avatar">
-        <button class="b-form__button" type="submit">Отправить</button>
-        <button type="reset">Очистить</button>
-    </form>
+    
 {% endblock %}
 
 

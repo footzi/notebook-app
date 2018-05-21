@@ -1,0 +1,146 @@
+@import '/../../node_modules/materialize-css/dist/css/materialize.css';
+
+$btn-color: #ff9800;
+$btn-color-send:#00c853;
+$btn-color-clear: #00e676 ;
+
+nav .brand-logo {
+   color: #00bcd4;
+}
+nav ul a {
+    color: #00bcd4;
+}
+
+/* label color */
+.input-field label {
+    color: #fff;
+}
+.input-field input[type=text] {
+    border-bottom: 1px solid #fff;
+}
+textarea.materialize-textarea{
+    border-bottom: 1px solid #fff;
+}
+/* label focus color */
+.input-field input[type=text]:focus + label {
+    color: #fff;
+}
+/* label underline focus color */
+.input-field input[type=text]:focus {
+    border-bottom: 1px solid #fff;
+    box-shadow: 0 1px 0 0 #fff;
+}
+/* valid color */
+.input-field input[type=text].valid {
+    border-bottom: 1px solid #fff;
+    box-shadow: 0 1px 0 0 #000;
+}
+/* invalid color */
+.input-field input[type=text].invalid {
+    border-bottom: 1px solid red;
+    box-shadow: 0 1px 0 0 #000;
+}
+/* icon prefix focus color */
+textarea.materialize-textarea:focus:not([readonly]) {
+    color: #fff;
+    border-bottom: 1px solid $btn-color;
+}
+
+input[type=text]:not(.browser-default):focus:not([readonly]) + label {
+    color: #fff;
+}
+
+input[type=text]:not(.browser-default):focus:not([readonly]) {
+    border-bottom: 1px solid $btn-color;
+}
+
+.b-header {
+    padding-left: 20px;
+    padding-right: 20px;
+    background-color: #ffffff;
+}
+
+.b-title {
+    color: #ffffff;
+    text-align: center;
+    padding: 0;
+}
+
+.b-subtitle {
+    color: #ffffff;
+    text-align: center;
+}
+
+.b-content {
+    padding-top: 100px;
+    background-color: #00bcd4;
+    min-height: 100vh;
+}
+
+.b-notes {
+    padding-top: 50px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin: 0
+}
+
+.b-notes__image {
+    width: 50px;
+}
+
+.b-notes__item {
+    transition: .5s linear all;
+    width: 45%;
+    cursor: pointer;
+
+    &:hover {
+        opacity: .7;
+    }
+}
+
+.b-notes__link {
+    font-size: 20px;
+    margin-top: 5px; 
+}
+
+.b-form {
+    display: flex;
+    flex-direction: column;
+    width: 40%;
+
+    button {
+        margin-bottom: 20px;
+    }
+}
+
+.b-form__input, 
+.b-form__textarea {
+    margin-bottom: 20px;
+    color: #fff;
+}
+
+.b-create {
+    text-align: center;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.b-btn {
+    background-color: $btn-color;
+    transition: .5s ease opacity;
+
+    &:hover {
+        opacity: .8;
+    }
+}
+
+.b-btn_state_send {
+    background-color: $btn-color-send;
+}
+
+.b-btn_state_clear {
+    background-color: $btn-color-clear;
+}

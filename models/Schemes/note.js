@@ -6,9 +6,8 @@ const Note = connectionDB.define('notes', {
     content: {
         type: Sequelize.TEXT,
     },
-    timeCreate: {
-        type: Sequelize.STRING,
-    }
+    timeCreate: Sequelize.STRING,
+    avatar: Sequelize.STRING
 })
 
 export default Note;

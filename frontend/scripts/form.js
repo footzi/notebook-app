@@ -13,6 +13,7 @@ class Form {
         this.file     = this.form.querySelector('.b-form__file');
         this.button   = this.form.querySelector('.b-form__button');
         this.noteItem = this.notes.querySelector('.b-notes__item');
+        console.log(this.file);
         this.bindEvents();
     }
 
@@ -30,22 +31,8 @@ class Form {
         this.formData.append('title', this.input.value);
         this.formData.append('content', this.textarea.value);
         this.formData.append('timeCreate', moment().format('h:mm, Do MMMM YYYY'));
-        console.log(this.file.files[0]);
         this.formData.append('avatar', this.file.files[0], 'avatar.jpg');
-        // this.note = {
-        //     title: this.input.value,
-        //     content: this.textarea.value,
-        //     timeCreate: moment().format('h:mm, Do MMMM YYYY'),
-            
-        // }
-        console.log(this.formData);
     }
-
-    // getDataImg() {
-    //     this.image = {
-
-    //     }
-    // }
 
     clear() {
         this.input.value    = '';
@@ -55,10 +42,18 @@ class Form {
     sendData() {
         fetch('/create-note', { 
             method : 'POST',
-            body   : this.formData
+            body   : this.formData,
         })
-        //.then(res => res.json())
-        //.then(json => this.insertTemplate(json));
+        .then(res => {
+            if (res.ok) {
+                res.json().then(json => this.insertTemplate(json));
+            } else {
+                res.text().then(text => alert(text))
+            }
+        })
+        .catch(err => {
+            console.error(err);
+        })
     }
 
     insertTemplate(data) {

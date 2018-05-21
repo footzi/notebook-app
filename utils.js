@@ -4,18 +4,19 @@ import randomstring from 'randomstring';
 
 //Разобраться с классами!
 const Utils = {
-    writeFile(catalog, files, callback) {
-        const filePath = `uploads/${catalog}/`;
-        const fileName =  randomstring.generate(10) + path.extname(files.name);
-        callback(fileName);
-        fs.writeFile(filePath + fileName, files.data, (err)=> {
-            console.log(err);
+    writeFile(catalog, file, fileName) {
+        return new Promise((resolve, reject) => {
+            fs.writeFile(catalog + fileName, file.data, (err)=> {
+                if(err) {
+                    reject(err)
+                }
+            })
         })
     },
 
-    generateFileName(file) {
-        return randomstring.generate(10) + path.extname(file.name);
+    generateFileName(name) {
+        return randomstring.generate(10) + path.extname(name);
     }
 }
-
+ 
 export default Utils;

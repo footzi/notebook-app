@@ -1,6 +1,5 @@
 import express from 'express';
 import twig from 'twig';
-import fs from 'fs';
 import path from 'path';
 import config from './config';
 import Sequelize from 'sequelize';
@@ -9,24 +8,10 @@ import bodyParser from 'body-parser';
 import homeController from './pages/home/controller';
 import noteController from './pages/note/controller';
 import fileUpload from 'express-fileupload';
-import randomstring from 'randomstring';
-
-import Utils from './utils'
-
-const multer = require('multer');
-// const storage = multer.diskStorage({
-//     destination: function (req, file, cb) {
-//       cb(null, `${__dirname}/uploads`);
-//     },
-//     filename: function (req, file, cb) {
-//       cb(null, randomstring.generate(10) + path.extname(file.originalname));
-//     }
-//   })
-   
-//const upload = multer({ storage: storage('test') }).single('avatar')
 
 const app = express();
 
+//настройка приема FormData
 app.use(fileUpload());
 
 //отдаем статичные файлы
@@ -45,22 +30,11 @@ app.set('twig options', {
 
 //обрабатываем маршруты
 app.get('/', homeController.renderAllNotes);
-//app.post('/create-note', homeController.createNote);
-app.post('/create-note', (req, res) => {
-    // const filePath = `${__dirname}/uploads/avatars/test.txt`;
-    // if(!req.files.avatar) {
-    //     return false;
-    // }
-    const files = req.files.avatar
-    console.log(Utils.generateFileName(req.files.avatar.name));
-    // Utils.writeFile('avatars', files, function(fileName) {
-    //   return fileName;
-    // });
-    
-    // console.log(fileName);
-});
-
+app.post('/create-note', homeController.createNote);
 app.get('/notes/:noteId', noteController.renderNote);
+app.use('/error', (req, res) => {
+    res.render('error');
+});
 
 //Синхронизаниця с БД
 // connectionDB.sync({
