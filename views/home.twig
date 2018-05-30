@@ -9,7 +9,7 @@
     <h2 class="b-title">Home page</h2>
     <h5 class="b-subtitle">(render, create, routing)</h5>
 
-    <ul class="b-notes row">
+    <ul class="b-notes j-notes">
         {% for note in notes %}
             {% include "./templates/note.twig" with {
                 id: note.id,
@@ -21,11 +21,12 @@
             %}
         {% endfor %}
     </ul>
+    <div>{{category}}</div>
     <div class="b-create">
         <h3 сlass="b-create__title">Создай запись</h3>
-        <form method="post" action="/create-note" class="b-form">
+        <form method="post" action="/create-note" class="b-form j-form">
             <div class="input-field">
-                <input id="title" type="text" name="title" class="b-form__input" class="validate">
+                <input id="title" type="text" name="title" class="b-form__input" class="validate" required>
                 <label for="title">Напиши заголовок:</label>
             </div>
             <div class="input-field">
@@ -46,6 +47,20 @@
             <button class="btn b-btn b-btn_state_clear" type="reset">Очистить</button>
         </form>
     </div>
+
+    <div class="b-create">
+        <h3 сlass="b-create__title">Создай новую категорию</h3>
+        <form method="post" action="/create-category" class="b-form j-form-category">
+            <div class="input-field">
+                <input id="create-title" type="text" name="title" class="b-form__input" class="validate" required="required">
+                <label for="create-title">Напиши название категории</label>
+            </div>
+            <button class="b-form__button btn b-btn b-btn_state_send" type="submit">Отправить</button>
+            <button class="btn b-btn b-btn_state_clear" type="reset">Очистить</button>
+        </form>
+    </div>
+
+    
    
 
     

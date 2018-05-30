@@ -13,7 +13,7 @@ class Form {
         this.file     = this.form.querySelector('.b-form__file');
         this.button   = this.form.querySelector('.b-form__button');
         this.noteItem = this.notes.querySelector('.b-notes__item');
-        console.log(this.file);
+        this.route    = this.form.getAttribute('action');
         this.bindEvents();
     }
 
@@ -40,7 +40,7 @@ class Form {
     }
 
     sendData() {
-        fetch('/create-note', { 
+        fetch(this.route, { 
             method : 'POST',
             body   : this.formData,
         })

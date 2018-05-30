@@ -5,8 +5,8 @@ import config from './config';
 import Sequelize from 'sequelize';
 import connectionDB from './database';
 import bodyParser from 'body-parser';
-import homeController from './pages/home/controller';
-import noteController from './pages/note/controller';
+import homeController from './controllers/home/controller';
+import noteController from './controllers/note/controller';
 import fileUpload from 'express-fileupload';
 
 const app = express();
@@ -32,15 +32,15 @@ app.set('twig options', {
 app.get('/', homeController.renderAllNotes);
 app.post('/create-note', homeController.createNote);
 app.get('/notes/:noteId', noteController.renderNote);
-app.use('/error', (req, res) => {
-    res.render('error');
-});
+app.post('/create-category', homeController.createCategory);
+// app.use('/error', (req, res) => {
+//     res.render('error');
+// });
 
 //Синхронизаниця с БД
-// connectionDB.sync({
-//     force: true,
-//     logging: console.log
-// });
+connectionDB.sync({
+    logging: console.log
+});
 
 //подключение к БД
 connectionDB

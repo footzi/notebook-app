@@ -1,5 +1,9 @@
 @import '/../../node_modules/materialize-css/dist/css/materialize.css';
 
+.test {
+    background-attachment: fixed;
+}
+
 $btn-color: #ff9800;
 $btn-color-send:#00c853;
 $btn-color-clear: #00e676 ;
@@ -85,23 +89,48 @@ input[type=text]:not(.browser-default):focus:not([readonly]) {
     margin: 0
 }
 
-.b-notes__image {
-    width: 50px;
+.b-notes__item {
+    background-color: #fafafa;
+    padding: 24px;
+    margin: 10px 0 10px 0;
+    border-radius: 2px;
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.2); 
+    flex: 0 0 45%;
 }
 
-.b-notes__item {
-    transition: .5s linear all;
-    width: 45%;
-    cursor: pointer;
+.b-notes__item-wrap {
+    display: flex;
+}
 
-    &:hover {
-        opacity: .7;
+.b-notes__info {
+    margin-left: 40px; 
+}
+
+.b-notes__image {
+    width: 80px;
+    height: 80px;
+
+    img {
+        border-radius: 50% 50%; 
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
     }
 }
 
 .b-notes__link {
     font-size: 20px;
+    line-height: 20px;
     margin-top: 5px; 
+
+    &:hover {
+        opacity: .7;
+
+        a {
+            transition: .1s linear all;
+            color: $btn-color;
+        }
+    }
 }
 
 .b-form {
@@ -130,9 +159,10 @@ input[type=text]:not(.browser-default):focus:not([readonly]) {
 
 .b-btn {
     background-color: $btn-color;
-    transition: .5s ease opacity;
+    
 
     &:hover {
+        transition: .5s ease all;
         opacity: .8;
     }
 }

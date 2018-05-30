@@ -1,9 +1,16 @@
 import Note from '../models/Schemes/note';
+import Category from '../models/Schemes/category';
 
 const notes = {
     async getAllNotes() {
         try {
-            return await Note.findAll({raw: true}).then(notes => notes); 
+            return await Note.findAll({
+                raw: true,
+                include: [Category] //либо all:true
+            })
+            .then(function(notes) {
+                console.log(notes[0])
+            }); 
         }
         catch(error) {
             console.error(`При поиске всех элементов возникла= ${error}`);

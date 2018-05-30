@@ -23,4 +23,7 @@ ADD COLUMN `female` VARCHAR(45) NULL AFTER `name`;
 SELECT * FROM new_table -- js
 SELECT * FROM `notes`.`new_table` - sql
 
+Удалить все
+DELETE FROM <имя таблицы > 
 
+WHERE screen < 12; - условие

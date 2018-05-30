@@ -1,11 +1,12 @@
 import '../styles/app.scss'
 import Form from './form';
-
-// document.ready(function() {
-//     M.updateTextFields();
-//   });
+import FormCategory from './form-category';
 
 const form = new Form({
-    form : document.querySelector('.b-form'),
-    notes: document.querySelector('.b-notes')
+    form : document.querySelector('.j-form'),
+    notes: document.querySelector('.j-notes')
+})
+
+const formCategory = new FormCategory({
+    form : document.querySelector('.j-form-category'),
 })

@@ -1,4 +1,5 @@
 import notes from '../../models/notes'
+import categories from '../../models/categories';
 import Utils from '../../utils'
 
 const homeController = {
@@ -6,6 +7,7 @@ const homeController = {
     renderAllNotes(req, res) {
         notes.getAllNotes()
             .then((resolve)=> {
+                //console.log(resolve)
                 res.render('home', {
                     notes: resolve
                 })
@@ -52,6 +54,16 @@ const homeController = {
             .catch((err) => {
                 console.log('Ошибка при сохранении данных ' + err);// Не знаю как имитировать
                 res.status(500).send(err);
+            })
+    },
+
+    //Создает новую категорию
+    createCategory(req, res) {
+        categories.setCategory(req.body)
+            .then(()=> res.send(200))
+            .catch((err) => {
+                console.log('Ошибка при сохранении данных ' + err)
+                res.status(500).send(err); //на фронте не понятно как распарсить ошибку, это объект
             })
     }
 };
