@@ -1,16 +1,14 @@
-import Note from '../models/Schemes/note';
-import Category from '../models/Schemes/category';
+import Note from '../models/Schemes/Note';
+import Category from '../models/Schemes/Category';
 
 const notes = {
     async getAllNotes() {
         try {
             return await Note.findAll({
-                raw: true,
-                include: [Category] //либо all:true
+                include: [Category]
             })
-            .then(function(notes) {
-                console.log(notes[0])
-            }); 
+            .map(el => el.get({ plain: true }))
+            .then(notes => notes); 
         }
         catch(error) {
             console.error(`При поиске всех элементов возникла= ${error}`);
