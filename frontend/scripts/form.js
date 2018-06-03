@@ -12,7 +12,7 @@ class Form {
         this.textarea = this.form.querySelector('.b-form__textarea');
         this.file     = this.form.querySelector('.b-form__file');
         this.button   = this.form.querySelector('.b-form__button');
-        this.noteItem = this.notes.querySelector('.b-notes__item');
+        this.category = this.form.querySelector('.b-form__select');
         this.route    = this.form.getAttribute('action');
         this.bindEvents();
     }
@@ -30,6 +30,7 @@ class Form {
         this.formData = new FormData();
         this.formData.append('title', this.input.value);
         this.formData.append('content', this.textarea.value);
+        this.formData.append('category', this.category.value);
         this.formData.append('timeCreate', moment().format('h:mm, Do MMMM YYYY'));
         this.formData.append('avatar', this.file.files[0], 'avatar.jpg');
     }
@@ -40,6 +41,7 @@ class Form {
     }
 
     sendData() {
+        console.log(this.route);
         fetch(this.route, { 
             method : 'POST',
             body   : this.formData,

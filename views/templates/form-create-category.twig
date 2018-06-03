@@ -7,6 +7,14 @@
         <label for="content">Придумай контент:</label>
         <textarea id="content" cols="30", rows="10" name="content" class="b-form__textarea materialize-textarea"></textarea>
     </div>
+    <div class="input-field">
+        <select class="b-form__select" required>
+            <option value="" disabled selected>Выбери категорию</option>
+            {% for category in categories %}
+                <option value={{category.id}}>{{category.name}}</option>
+            {% endfor %}
+        </select>
+    </div>
     <div class="file-field input-field">
         <div class="btn b-btn">
             <span>Загрузи аватарку:</span>
@@ -16,9 +24,6 @@
             <input class="file-path validate" type="text">
         </div>
     </div>
-    {% for category in categories %}
-        <span>{{category.id}}</span>
-    {% endfor %}
     <button class="b-form__button btn b-btn b-btn_state_send" type="submit">Отправить</button>
     <button class="btn b-btn b-btn_state_clear" type="reset">Очистить</button>
 </form>

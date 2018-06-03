@@ -29,13 +29,10 @@ app.set('twig options', {
 });
 
 //обрабатываем маршруты
-app.get('/', homeController.renderAllNotes);
+app.get('/', homeController.renderHomePage);
 app.post('/create-note', homeController.createNote);
 app.get('/notes/:noteId', noteController.renderNote);
 app.post('/create-category', homeController.createCategory);
-// app.use('/error', (req, res) => {
-//     res.render('error');
-// });
 
 //Синхронизаниця с БД
 // connectionDB.sync({
