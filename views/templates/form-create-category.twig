@@ -1,11 +1,11 @@
 <form method="post" action="/create-note" class="b-form j-form">
     <div class="input-field">
-        <input id="title" type="text" name="title" class="b-form__input" class="validate" required>
+        <input id="title" type="text" name="title" class="b-form__input" class="validate" autocomplete="off">
         <label for="title">Напиши заголовок:</label>
     </div>
     <div class="input-field">
         <label for="content">Придумай контент:</label>
-        <textarea id="content" cols="30", rows="10" name="content" class="b-form__textarea materialize-textarea"></textarea>
+        <textarea id="content" cols="30", rows="30" name="content" class="b-form__textarea materialize-textarea"></textarea>
     </div>
     <div class="input-field">
         <select class="b-form__select" required>

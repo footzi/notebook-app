@@ -22,5 +22,4 @@ const Note = connectionDB.define('notes', {
 
 Note.belongsTo(Category, {foreignKey: 'categoryId'});
 
-
 export default Note;

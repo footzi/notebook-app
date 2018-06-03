@@ -16,6 +16,7 @@ const notes = {
         }
     },
     async setNote(data) {
+        console.log(data);
         try {
             return await Note.create(data);
         }

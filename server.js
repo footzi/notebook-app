@@ -35,9 +35,9 @@ app.get('/notes/:noteId', noteController.renderNote);
 app.post('/create-category', homeController.createCategory);
 
 //Синхронизаниця с БД
-// connectionDB.sync({
-//     logging: console.log
-// });
+connectionDB.sync({
+    logging: console.log
+});
 
 //подключение к БД
 connectionDB

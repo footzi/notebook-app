@@ -6,11 +6,19 @@
 {% block content %}
     <h2 class="b-title">Home page</h2>
     <h5 class="b-subtitle">(render, create, routing)</h5>
-    <h1></h1>
 
     <ul class="b-notes j-notes">
-        {% include "./templates/note.twig" %}
+        {% for note in notes %}
+            {% include "./templates/note.twig" with {
+                id        : note.id, 
+                title     : note.title, 
+                content   : note.content,
+                avatar    : note.avatar,
+                category  : note.category,
+                timeCreate: note.timeCreate} %}
+        {% endfor %}
     </ul>
+
     <div class="b-create">
         <h3 сlass="b-create__title">Создай запись</h3>
         {% include "templates/form-create-category.twig"%}
