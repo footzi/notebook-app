@@ -4,27 +4,16 @@
     Главная страница
 {% endblock %}
 {% block content %}
-    {# <h2>Домашняя страница</h2>
-    <h3>Все записи</h3> #}
     <h2 class="b-title">Home page</h2>
     <h5 class="b-subtitle">(render, create, routing)</h5>
+    <h1></h1>
 
     <ul class="b-notes j-notes">
-        {% for note in notes %}
-            {% include "./templates/note.twig" with {
-                id: note.id,
-                title: note.title,
-                content: note.content,
-                avatar: note.avatar, 
-                timeCreate: note.timeCreate,
-                category: note.category
-                }
-            %}
-        {% endfor %}
+        {% include "./templates/note.twig" %}
     </ul>
     <div class="b-create">
         <h3 сlass="b-create__title">Создай запись</h3>
-        {% include "./templates/form.twig" %}
+        {% include "templates/form-create-category.twig"%}
     </div>
 
     <div class="b-create">
@@ -38,11 +27,6 @@
             <button class="btn b-btn b-btn_state_clear" type="reset">Очистить</button>
         </form>
     </div>
-
-    
-   
-
-    
 {% endblock %}
 
 

@@ -3,16 +3,43 @@ import categories from '../../models/categories';
 import Utils from '../../utils'
 
 const homeController = {
+
+    renderHomePage(req, res) {
+        let data = [];
+        async function test() {
+                return notes.getAllNotes()
+                    .then(resolve => resolve)
+        }
+
+        // async getAllNotes() {
+        //     return await notes.getAllNotes()
+        //         .then((resolve) => {
+                
+        //         return resolve
+        //         })
+        // }
+        
+
+        test().then(test => data.push(test));
+
+        console.log(data)
+
+       
+        res.end()
+        
+
+    },
     //выводит все записи
     renderAllNotes(req, res) {
         notes.getAllNotes()
             .then((resolve)=> {
                 res.render('home', {
-                    notes: resolve
+                    notes: resolve,
+                    categories: [{id: "1"},{id: "2"}]
                 })
             })
             .catch((err)=> {
-                console.log('ошибка при получении данных ' + err);
+                console.log('ошибка при получении записей' + err);
                 res.status(500);
                 res.end();
             })

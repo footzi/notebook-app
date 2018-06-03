@@ -133,6 +133,16 @@ input[type=text]:not(.browser-default):focus:not([readonly]) {
     }
 }
 
+.b-notes__category {
+    margin-top: 20px;
+    font-size: 18px;
+    font-weight: bold;
+
+    span {
+        font-weight: normal;
+    }
+}
+
 .b-form {
     display: flex;
     flex-direction: column;

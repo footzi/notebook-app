@@ -1,18 +1,22 @@
-<li class="b-notes__item">
-    <div class="b-notes__item-wrap">
-        <h1>{{category.name}}</h1>
-        {% if avatar %}
-            <div class="b-notes__image">
-                <img src={{avatar}} alt={{title}} >
-            </div>            
-        {% endif %}
-        <div class="b-notes__info">
-            <div class="b-notes__time">
-                <time>{{timeCreate}}</time>
-            </div>
-            <div class="b-notes__link">
-                 <a href="notes/{{id}}">{{title}}</a>
+{% for note in notes %}
+    <li class="b-notes__item">
+        <div class="b-notes__item-wrap">
+            {% if note.avatar %}
+                <div class="b-notes__image">
+                    <img src={{note.avatar}} alt={{note.title}} >
+                </div>            
+            {% endif %}
+            <div class="b-notes__info">
+                <div class="b-notes__time">
+                    <time>{{note.timeCreate}}</time> 
+                </div>
+                <div class="b-notes__link">
+                    <a href="notes/{{note.id}}">{{note.title}}</a>
+                </div>
+                <div class="b-notes__category">Категория:
+                    <span>{{note.category.name}}</span>
+                </div>
             </div>
         </div>
-    </div>
-</li>
+    </li>
+{% endfor %}

@@ -55,3 +55,6 @@ connectionDB
 app.listen(config.PORT, () => {
     console.log(`Example app listening on port ${config.PORT}!`);
 });
+
+
+///https://strongloop.com/strongblog/bypassing-express-view-rendering-for-speed-and-modularity/
