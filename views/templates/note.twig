@@ -1,16 +1,22 @@
 <li class="b-notes__item">
-    <div class="card-panel grey lighten-5 z-depth-1 row">
+    <div class="b-notes__item-wrap">
         {% if avatar %}
-            <div class="col s4 m2">
-                <img class="b-notes__image  circle responsive-img valign" src={{avatar}} alt={{title}} >
+            <div class="b-notes__image">
+                <img src={{avatar}} alt={{title}} >
             </div>            
         {% endif %}
-        <div class="col s8 m10">
+        <div class="b-notes__info">
             <div class="b-notes__time">
-                <time>{{timeCreate}}</time>
+                <time>{{timeCreate}}</time> 
             </div>
             <div class="b-notes__link">
-                 <a href="notes/{{id}}">{{title}}</a>
+                <a href="notes/{{id}}">{{title}}</a>
+            </div>
+            <div class="b-notes__category">Категория:
+                <p>{{category.name}}</p>
+            </div>
+            <div class="b-notes__category">Подкатегория:
+                <p>{{category.name}}</p>
             </div>
         </div>
     </div>

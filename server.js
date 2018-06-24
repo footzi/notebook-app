@@ -5,12 +5,12 @@ import config from './config';
 import Sequelize from 'sequelize';
 import connectionDB from './database';
 import bodyParser from 'body-parser';
-import homeController from './pages/home/controller';
-import noteController from './pages/note/controller';
+import homeController from './controllers/home/controller';
+import noteController from './controllers/note/controller';
 import fileUpload from 'express-fileupload';
 
 const app = express();
-
+//where: {categoryId: {[Op.col]: 'Category.categoryId'}}}
 //настройка приема FormData
 app.use(fileUpload());
 
@@ -29,18 +29,18 @@ app.set('twig options', {
 });
 
 //обрабатываем маршруты
-app.get('/', homeController.renderAllNotes);
-app.post('/create-note', homeController.createNote);
+app.get('/', homeController.renderHomePage);
 app.get('/notes/:noteId', noteController.renderNote);
-app.use('/error', (req, res) => {
-    res.render('error');
-});
+app.post('/get-subcategory', homeController.getSubcategory);
+app.post('/create-note', homeController.createNote);
+app.post('/create-category', homeController.createCategory);
+app.post('/create-subcategory', homeController.createSubcategory);
+
 
 //Синхронизаниця с БД
-// connectionDB.sync({
-//     force: true,
-//     logging: console.log
-// });
+connectionDB.sync({
+    logging: console.log
+});
 
 //подключение к БД
 connectionDB
@@ -55,3 +55,6 @@ connectionDB
 app.listen(config.PORT, () => {
     console.log(`Example app listening on port ${config.PORT}!`);
 });
+
+
+///https://strongloop.com/strongblog/bypassing-express-view-rendering-for-speed-and-modularity/

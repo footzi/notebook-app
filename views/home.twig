@@ -4,51 +4,57 @@
     Главная страница
 {% endblock %}
 {% block content %}
-    {# <h2>Домашняя страница</h2>
-    <h3>Все записи</h3> #}
     <h2 class="b-title">Home page</h2>
     <h5 class="b-subtitle">(render, create, routing)</h5>
 
-    <ul class="b-notes row">
+    <ul class="b-notes j-notes">
         {% for note in notes %}
             {% include "./templates/note.twig" with {
-                id: note.id,
-                title: note.title,
-                content: note.content,
-                avatar: note.avatar, 
-                timeCreate: note.timeCreate
-                }
-            %}
+                id        : note.id, 
+                title     : note.title, 
+                content   : note.content,
+                avatar    : note.avatar,
+                category  : note.category,
+                timeCreate: note.timeCreate} %}
         {% endfor %}
     </ul>
+
     <div class="b-create">
         <h3 сlass="b-create__title">Создай запись</h3>
-        <form method="post" action="/create-note" class="b-form">
+        {% include "templates/form-create-category.twig"%}
+    </div>
+
+    <div class="b-create">
+        <h3 сlass="b-create__title">Создай новую категорию</h3>
+        <form method="post" action="/create-category" class="b-form j-form-category">
             <div class="input-field">
-                <input id="title" type="text" name="title" class="b-form__input" class="validate">
-                <label for="title">Напиши заголовок:</label>
+                <input id="create-title" type="text" name="name" class="b-form__input" class="validate" required="required" autocomplete="off">
+                <label for="create-title">Напиши название категории</label>
             </div>
-            <div class="input-field">
-                <label for="content">Придумай контент:</label>
-                <textarea id="content" cols="30", rows="10" name="content" class="b-form__textarea materialize-textarea"></textarea>
-            </div>
-            <div class="file-field input-field">
-                <div class="btn b-btn">
-                    <span>Загрузи аватарку:</span>
-                    <input type="file" accept=".jpg, .jpeg, .png" class="b-form__file" name="avatar">
-                </div>
-                <div class="file-path-wrapper">
-                    <input class="file-path validate" type="text">
-                </div>
-            </div>
-            {# <input type="file" accept=".jpg, .jpeg, .png" class="b-form__file" name="avatar"> #}
             <button class="b-form__button btn b-btn b-btn_state_send" type="submit">Отправить</button>
             <button class="btn b-btn b-btn_state_clear" type="reset">Очистить</button>
         </form>
     </div>
-   
 
-    
+    <div class="b-create">
+        <h3 сlass="b-create__title">Создай новую подкатегорию</h3>
+        <form method="post" action="/create-subcategory" class="b-form j-form-subcategory">
+            <div class="input-field">
+                <input id="create-subtitle" type="text" name="name" class="b-form__input" class="validate" required="required" autocomplete="off">
+                <label for="create-subtitle">Напиши название подкатегории</label>
+            </div>
+            <div class="input-field">
+                <select class="b-form__select" required name="categoryId">
+                    <option disabled selected>Выбери родительскую категорию</option>
+                    {% for category in categories %}
+                        <option value={{category.id}}>{{category.name}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <button class="b-form__button btn b-btn b-btn_state_send" type="submit">Отправить</button>
+            <button class="btn b-btn b-btn_state_clear" type="reset">Очистить</button>
+        </form>
+    </div>
 {% endblock %}
 
 

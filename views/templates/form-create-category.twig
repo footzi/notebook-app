@@ -1,0 +1,34 @@
+<form method="post" action="/create-note" class="b-form j-form">
+    <div class="input-field">
+        <input id="title" type="text" name="title" class="b-form__input" class="validate" autocomplete="off">
+        <label for="title">Напиши заголовок:</label>
+    </div>
+    <div class="input-field">
+        <label for="content">Придумай контент:</label>
+        <textarea id="content" cols="30", rows="30" name="content" class="b-form__textarea materialize-textarea"></textarea>
+    </div>
+    <div class="input-field">
+        <select class="b-form__select" required>
+            <option value="" disabled selected>Выбери категорию</option>
+            {% for category in categories %}
+                <option value={{category.id}}>{{category.name}}</option>
+            {% endfor %}
+        </select>
+        <div class="input-field">
+            <select class="b-form__select-subcat" required name="categoryId">
+                <option disabled selected>Выбери подкатегорию</option>
+            </select>
+        </div>
+    </div>
+    <div class="file-field input-field">
+        <div class="btn b-btn">
+            <span>Загрузи аватарку:</span>
+            <input type="file" accept=".jpg, .jpeg, .png" class="b-form__file" name="avatar">
+        </div>
+        <div class="file-path-wrapper">
+            <input class="file-path validate" type="text">
+        </div>
+    </div>
+    <button class="b-form__button btn b-btn b-btn_state_send" type="submit">Отправить</button>
+    <button class="btn b-btn b-btn_state_clear" type="reset">Очистить</button>
+</form>
