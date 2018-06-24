@@ -10,7 +10,7 @@ import noteController from './controllers/note/controller';
 import fileUpload from 'express-fileupload';
 
 const app = express();
-
+//where: {categoryId: {[Op.col]: 'Category.categoryId'}}}
 //настройка приема FormData
 app.use(fileUpload());
 
@@ -30,9 +30,12 @@ app.set('twig options', {
 
 //обрабатываем маршруты
 app.get('/', homeController.renderHomePage);
-app.post('/create-note', homeController.createNote);
 app.get('/notes/:noteId', noteController.renderNote);
+app.post('/get-subcategory', homeController.getSubcategory);
+app.post('/create-note', homeController.createNote);
 app.post('/create-category', homeController.createCategory);
+app.post('/create-subcategory', homeController.createSubcategory);
+
 
 //Синхронизаниця с БД
 connectionDB.sync({

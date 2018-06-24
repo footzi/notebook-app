@@ -5,6 +5,12 @@ const connectionDB = new Sequelize(config.database, config.user, config.password
     host: config.host,
     dialect: 'mysql',
     operatorsAliases: false,
+    define: {
+      charset: 'utf8',
+      dialectOptions: {
+        collate: 'utf8_general_ci'
+      }
+    },
   
     pool: {
       max: 5,

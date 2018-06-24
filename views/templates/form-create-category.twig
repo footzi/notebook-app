@@ -14,6 +14,11 @@
                 <option value={{category.id}}>{{category.name}}</option>
             {% endfor %}
         </select>
+        <div class="input-field">
+            <select class="b-form__select-subcat" required name="categoryId">
+                <option disabled selected>Выбери подкатегорию</option>
+            </select>
+        </div>
     </div>
     <div class="file-field input-field">
         <div class="btn b-btn">

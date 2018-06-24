@@ -1,5 +1,6 @@
 import Sequelize from 'sequelize';
 import connectionDB from '../../database';
+import Subcategory from './Subcategory';
 
 const Category = connectionDB.define('categories', {
     id: {
@@ -10,5 +11,9 @@ const Category = connectionDB.define('categories', {
     },            
     name: Sequelize.STRING,
 })
+
+Category.belongsToMany(Subcategory, {through: 'categoryId'});
+
+
 
 export default Category;

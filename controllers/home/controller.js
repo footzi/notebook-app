@@ -76,7 +76,29 @@ const homeController = {
         categories.setCategory(req.body)
             .then(()=> res.send(200))
             .catch((err) => {
-                console.log('Ошибка при сохранении данных ' + err)
+                console.log('Ошибка при сохранении категории ' + err)
+                res.status(500).send(err); //на фронте не понятно как распарсить ошибку, это объект
+            })
+    },
+
+    //Создает новую подкатегорию
+    createSubcategory(req, res) {
+        categories.setSubcategory(req.body)
+            .then(()=> res.send(200))
+            .catch((err) => {
+                console.log('Ошибка при сохранении подкатегории ' + err)
+                res.status(500).send(err); //на фронте не понятно как распарсить ошибку, это объект
+            })
+    },
+
+    //Получает из базы подкатегории выбранной категории
+    getSubcategory(req, res) {
+        categories.getSubcategory(req.body.value)
+            .then((subcategories)=> {
+                res.json(subcategories);
+            })
+            .catch((err) => {
+                console.log('Ошибка при выводе подкатегорий по категории ' + err)
                 res.status(500).send(err); //на фронте не понятно как распарсить ошибку, это объект
             })
     }

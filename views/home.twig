@@ -28,8 +28,28 @@
         <h3 сlass="b-create__title">Создай новую категорию</h3>
         <form method="post" action="/create-category" class="b-form j-form-category">
             <div class="input-field">
-                <input id="create-title" type="text" name="name" class="b-form__input" class="validate" required="required">
+                <input id="create-title" type="text" name="name" class="b-form__input" class="validate" required="required" autocomplete="off">
                 <label for="create-title">Напиши название категории</label>
+            </div>
+            <button class="b-form__button btn b-btn b-btn_state_send" type="submit">Отправить</button>
+            <button class="btn b-btn b-btn_state_clear" type="reset">Очистить</button>
+        </form>
+    </div>
+
+    <div class="b-create">
+        <h3 сlass="b-create__title">Создай новую подкатегорию</h3>
+        <form method="post" action="/create-subcategory" class="b-form j-form-subcategory">
+            <div class="input-field">
+                <input id="create-subtitle" type="text" name="name" class="b-form__input" class="validate" required="required" autocomplete="off">
+                <label for="create-subtitle">Напиши название подкатегории</label>
+            </div>
+            <div class="input-field">
+                <select class="b-form__select" required name="categoryId">
+                    <option disabled selected>Выбери родительскую категорию</option>
+                    {% for category in categories %}
+                        <option value={{category.id}}>{{category.name}}</option>
+                    {% endfor %}
+                </select>
             </div>
             <button class="b-form__button btn b-btn b-btn_state_send" type="submit">Отправить</button>
             <button class="btn b-btn b-btn_state_clear" type="reset">Очистить</button>
